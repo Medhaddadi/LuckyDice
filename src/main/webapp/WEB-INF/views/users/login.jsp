@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <jsp:include page="../layouts/header.jsp"/>
 <div class="wrapper">
@@ -18,8 +19,9 @@
         <button class="btn mt-3" onclick="validate()">Login</button>
     </form>
     <div class="text-center fs-6">
-        <a href="#">Forget password?</a> or <a href="${pageContext.request.contextPath}/Signing">Register</a>
+        <a href="#">Forget password?</a> or <a href="${pageContext.request.contextPath}/Signing">Sign up</a>
     </div>
+
     <div class="alert-danger p-3 text-center">
         <p class="text-danger">${requestScope.error}</p>
     </div>
@@ -27,5 +29,4 @@
 
 <script src="${pageContext.request.contextPath}/style/js/login.js">
 </script>
-<%--when i try to use this link "${pageContext.request.contextPath}/views/layouts/footer.jsp" gives me an error .why? --%>
 <jsp:include page="../layouts/footer.jsp"/>

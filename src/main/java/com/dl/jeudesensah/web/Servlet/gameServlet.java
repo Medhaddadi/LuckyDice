@@ -14,8 +14,7 @@ import java.io.IOException;
 public class gameServlet extends HttpServlet {
     userDao gameDAO;
     public void init() throws ServletException {
-        DaoFactory daoFactory = DaoFactory.getInstance();
-        this.gameDAO = daoFactory.getUserDao();
+        this.gameDAO = (userDao) this.getServletContext().getAttribute("gameData");
     }
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -26,22 +25,22 @@ public class gameServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+        //get the number of the dice
         int NumberDes = Integer.parseInt(request.getParameter("desNumber"));
-        if (NumberDes < 1 || NumberDes > 3) {
-            request.setAttribute("error", "Number of des must be between 1 and 3");
-            response.sendRedirect(request.getContextPath() + "/play");
-            return;
-        }
+        //get the session
         HttpSession session = request.getSession();
         String gameoverPage = "/WEB-INF/views/game/gameover.jsp";
         String gamePage = "/WEB-INF/views/game/play.jsp";
         User user = (User) session.getAttribute("user");
         Game game = (Game) session.getAttribute("gameState");
+        //if the game is null, create a new game
         if (game == null) {
             game = new Game(-1, false, user);
         }
+        //if the game is over, redirect to gameover page
         if (game.isGameover()){
-            gameDAO.updateScore(game.getUser());
+            //update the score of the user and redirect to gameover page
             RequestDispatcher rd = request.getRequestDispatcher(gameoverPage);
             rd.forward(request, response);
             return;

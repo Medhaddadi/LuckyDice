@@ -14,8 +14,7 @@ import java.util.List;
 public class PlayersServlet extends HttpServlet {
     userDao userDAO;
     public void init() throws ServletException {
-        DaoFactory daoFactory = DaoFactory.getInstance();
-        this.userDAO = daoFactory.getUserDao();
+        this.userDAO = (userDao) this.getServletContext().getAttribute("gameData");
     }
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

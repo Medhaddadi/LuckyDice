@@ -15,8 +15,7 @@ public class SigninServlet extends HttpServlet {
     private userDao userDAO;
 
     public void init() throws ServletException {
-        DaoFactory daoFactory = DaoFactory.getInstance();
-        this.userDAO = daoFactory.getUserDao();
+        this.userDAO = (userDao) this.getServletContext().getAttribute("gameData");
     }
 
     @Override
