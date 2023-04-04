@@ -1,4 +1,3 @@
-
 ## Lucky Dice Roll
 
 This repository contains my solution for the "3 Dice Roll" application specification. The application allows the user to roll three dice in any order, each numbered 1, 2, or 3. The text field allows the user to indicate which die to roll, and the roll is triggered by clicking the "Roll the Dice" button.
